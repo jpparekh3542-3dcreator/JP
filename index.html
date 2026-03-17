@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>3D Model + AR View</title>
+
+  <!-- Model Viewer (Google) -->
+  <script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
+
+  <style>
+    body {
+      margin: 0;
+      background: #111;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    model-viewer {
+      width: 100%;
+      height: 100vh;
+    }
+  </style>
+</head>
+<body>
+
+  <model-viewer
+    src="model.glb"                 <!-- YOUR GLB FILE -->
+    ar                             <!-- Enables AR -->
+    ar-modes="scene-viewer webxr quick-look"
+    camera-controls
+    auto-rotate
+    shadow-intensity="1"
+    exposure="1"
+    environment-image="neutral"
+    poster="poster.png">
+
+    <!-- AR Button -->
+    <button slot="ar-button" style="
+      background: white;
+      border-radius: 6px;
+      border: none;
+      padding: 10px 16px;
+      position: absolute;
+      bottom: 20px;
+      right: 20px;
+      font-size: 14px;
+      cursor: pointer;">
+      View in your space 🚀
+    </button>
+
+  </model-viewer>
+
+</body>
+</html>
