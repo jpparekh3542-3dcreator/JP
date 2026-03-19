@@ -1,8 +1,8 @@
 const viewer = document.getElementById("viewer");
 
 // Set attributes dynamically
-viewer.src = "Dazzle Soap Dish.glb";
-viewer.setAttribute("ios-src", "Dazzle Soap Dish.usdz");
+viewer.src = "Model/Dazzle Soap Dish.glb";
+viewer.setAttribute("ios-src", "Model/Dazzle Soap Dish.usdz");
 viewer.alt = "3D Model";
 
 // Enable AR
