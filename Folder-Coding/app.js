@@ -1,7 +1,7 @@
 const viewer = document.getElementById("viewer");
 
 // Correct paths (VERY IMPORTANT)
-viewer.src="Folder-Coding/Soap-Dish.glb";
+viewer.src = "Folder-Coding/Soap-Dish.glb";
 viewer.setAttribute("ios-src","Folder-Coding/Soap-Dish.usdz");
 
 viewer.alt = "Soap-Dish";
@@ -22,7 +22,7 @@ viewer.style.height = "100vh";
 
 // AR Button
 const arButton = document.createElement("button");
-arButton.innerText = "View in your space 🚀";
+arButton.innerText = "View-in-your-space 🚀";
 
 arButton.style.position = "absolute";
 arButton.style.bottom = "20px";
