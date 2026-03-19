@@ -1,10 +1,10 @@
 const viewer = document.getElementById("viewer");
 
 // Correct paths (VERY IMPORTANT)
-viewer.src = "Folder-Coding/Soap-Dish.glb";
-viewer.setAttribute("ios-src", "Folder-Coding/Soap-Dish.usdz");
+viewer.src="Folder-Coding/Soap-Dish.glb";
+viewer.setAttribute("ios-src","Folder-Coding/Soap-Dish.usdz");
 
-viewer.alt = "Dazzle Soap Dish";
+viewer.alt = "Soap-Dish";
 
 // AR setup
 viewer.setAttribute("ar", "");
