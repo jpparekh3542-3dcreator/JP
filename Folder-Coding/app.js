@@ -1,8 +1,8 @@
 const viewer = document.getElementById("viewer");
 
 // Correct paths (VERY IMPORTANT)
-viewer.src = "../Model/Dazzle Soap Dish.glb";
-viewer.setAttribute("ios-src", "../Model/Dazzle Soap Dish.usdz");
+viewer.src = "Dazzle Soap Dish.glb";
+viewer.setAttribute("ios-src", "Dazzle Soap Dish.usdz");
 
 viewer.alt = "Dazzle Soap Dish";
 
