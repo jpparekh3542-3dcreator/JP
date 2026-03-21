@@ -1,58 +1,77 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  Dazzel Soap Dish
-  
   <meta charset="UTF-8">
-  <title>3D Model + AR View</title>
+  <title>AR Viewer</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <!-- Model Viewer (Google) -->
+  <!-- model-viewer -->
   <script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
 
   <style>
     body {
       margin: 0;
-      background: #274d3e;
+      font-family: Arial, sans-serif;
+      background: #111;
       display: flex;
-      justify-content: center;
+      flex-direction: column;
       align-items: center;
+      justify-content: center;
       height: 100vh;
     }
 
     model-viewer {
-      width: 90%;
-      height: 90%;
+      width: 100%;
+      height: 80vh;
+      background: #222;
+    }
+
+    .ar-button {
+      margin-top: 15px;
+      padding: 12px 20px;
+      font-size: 16px;
+      background: #ff6f00;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: bold;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+    }
+
+    .ar-button:hover {
+      background: #ff8f00;
     }
   </style>
 </head>
 <body>
 
- 
-   <model-viewer
-  src="Soap-Dish.glb"
-  ios-src="Soap-Dish.usdz"
-  ar
-  ar-modes="scene-viewer webxr quick-look"
-  camera-controls
-  auto-rotate>
-      
-    <button slot="ar-button" style="
-      background: white;
-      border-radius: 8px;
-      border: none;
-      padding: 20px 32px;
-      position: fixed;
-      top: 40px;
-      centre: 40px;
-      z-index: 999;
-      top: 50px;
-      centre: 40px;
-      font-size: 24px;
-      cursor: pointer;">
-      View in your space 🚀
-    </button>
-
+  <model-viewer
+    id="viewer"
+    src="Soap-Dish.glb"
+    ios-src="Soap-Dish.usdz"
+    alt="3D Model"
+    ar
+    ar-modes="scene-viewer quick-look webxr"
+    camera-controls
+    auto-rotate
+    shadow-intensity="1"
+  >
   </model-viewer>
+
+  <!-- Custom AR Button -->
+  <button class="ar-button" onclick="openAR()">🚀 View in AR</button>
+
+  <script>
+    function openAR() {
+      const viewer = document.getElementById('viewer');
+      if (viewer.canActivateAR) {
+        viewer.activateAR();
+      } else {
+        alert("AR not supported on this device");
+      }
+    }
+  </script>
 
 </body>
 </html>
