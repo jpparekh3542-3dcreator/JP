@@ -58,8 +58,8 @@ button:hover{
   exposure="1"
   environment-image="neutral"
   interaction-prompt="none"
-  animation-loop="once"
-  autoplay="false">
+  autoplay="false"
+  animation-loop="once">
 
 <!-- AR Button -->
 <button slot="ar-button" style="
@@ -81,35 +81,36 @@ button:hover{
 <script>
 const viewer = document.getElementById("cabinet");
 
+let duration = 0;
+
 viewer.addEventListener("load", () => {
   viewer.pause();
   viewer.currentTime = 0;
+  duration = viewer.duration; // duration of 0-50 frames
 });
 
-// OPEN
 function openDoor(){
   viewer.pause();
   viewer.currentTime = 0;
   viewer.play();
 
-  setTimeout(()=>{
+  setTimeout(() => {
     viewer.pause();
-    viewer.currentTime = viewer.duration;
-  }, viewer.duration * 1000);
+    viewer.currentTime = duration;
+  }, duration * 1000);
 }
 
-// CLOSE
 function closeDoor(){
   viewer.pause();
-  viewer.currentTime = viewer.duration;
+  viewer.currentTime = duration;
   viewer.play({direction:"reverse"});
 
-  setTimeout(()=>{
+  setTimeout(() => {
     viewer.pause();
     viewer.currentTime = 0;
-  }, viewer.duration * 1000);
+  }, duration * 1000);
 }
 </script>
-
+  
 </body>
 </html>
