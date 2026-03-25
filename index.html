@@ -69,15 +69,33 @@ button:hover {
 <script>
 const viewer = document.getElementById("cabinet");
 
+viewer.addEventListener("load", () => {
+  viewer.pause();
+  viewer.currentTime = 0;
+});
+
 function openDoor() {
   viewer.currentTime = 0;
   viewer.play();
+
+  viewer.addEventListener('finished', stopAtEnd, { once: true });
+}
+
+function stopAtEnd() {
+  viewer.pause();
+  viewer.currentTime = viewer.duration;
 }
 
 function closeDoor() {
-  viewer.pause();
   viewer.currentTime = viewer.duration;
   viewer.play({ direction: "reverse" });
+
+  viewer.addEventListener('finished', stopAtStart, { once: true });
+}
+
+function stopAtStart() {
+  viewer.pause();
+  viewer.currentTime = 0;
 }
 </script>
 
