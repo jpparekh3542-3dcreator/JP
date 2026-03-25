@@ -1,116 +1,103 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mirror Cabinet Viewer</title>
 
-<title>Mirror Cabinet Viewer</title>
+  <script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/3.4.0/model-viewer.min.js"></script>
 
-<script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
+  <style>
+    body {
+      margin: 0;
+      background: #f5f5f5;
+      font-family: Arial, sans-serif;
+    }
 
-<style>
-body{
-  margin:0;
-  background:#f5f5f5;
-  font-family:Arial, sans-serif;
-}
+    model-viewer {
+      width: 100%;
+      height: 100vh;
+      background: #ffffff;
+    }
 
-model-viewer{
-  width:100%;
-  height:100vh;
-  background:#ffffff;
-}
+    .controls {
+      position: absolute;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      /* Added z-index to ensure buttons stay clickable over the 3D canvas */
+      z-index: 10; 
+      display: flex;
+      gap: 10px;
+    }
 
-.controls{
-  position:absolute;
-  bottom:20px;
-  left:50%;
-  transform:translateX(-50%);
-}
+    button {
+      padding: 12px 20px;
+      border: none;
+      background: #000;
+      color: #fff;
+      cursor: pointer;
+      font-size: 14px;
+      border-radius: 6px;
+      transition: background 0.2s ease;
+    }
 
-button{
-  padding:12px 20px;
-  margin:5px;
-  border:none;
-  background:#000;
-  color:#fff;
-  cursor:pointer;
-  font-size:14px;
-  border-radius:6px;
-}
-
-button:hover{
-  background:#444;
-}
-</style>
+    button:hover {
+      background: #444;
+    }
+  </style>
 </head>
-
 <body>
 
-<model-viewer
-  id="cabinet"
-  src="02 Mirror Cabinet.glb"
-  ios-src="02 Mirror Cabinet.usdz"
-  ar
-  ar-modes="webxr scene-viewer quick-look"
-  camera-controls
-  shadow-intensity="1"
-  exposure="1"
-  environment-image="neutral"
-  interaction-prompt="none"
-  autoplay="false"
-  animation-loop="once">
+  <model-viewer
+    id="cabinet"
+    src="02 Mirror Cabinet.glb"
+    ios-src="02 Mirror Cabinet.usdz"
+    ar
+    ar-modes="webxr scene-viewer quick-look"
+    camera-controls
+    shadow-intensity="1"
+    exposure="1"
+    environment-image="neutral"
+    interaction-prompt="none">
 
-<!-- AR Button -->
-<button slot="ar-button" style="
-  background:black;
-  color:white;
-  border-radius:6px;
-  padding:6px 10px;
-  border:none;">
-  View in AR
-</button>
+    <button slot="ar-button" style="
+      background: black;
+      color: white;
+      border-radius: 6px;
+      padding: 10px 16px;
+      border: none;
+      position: absolute;
+      bottom: 80px; 
+      left: 50%;
+      transform: translateX(-50%);">
+      View in AR
+    </button>
 
-</model-viewer>
+  </model-viewer>
 
-<div class="controls">
-  <button onclick="openDoor()">Open Door</button>
-  <button onclick="closeDoor()">Close Door</button>
-</div>
+  <div class="controls">
+    <button id="open-btn">Open Door</button>
+    <button id="close-btn">Close Door</button>
+  </div>
 
-<script>
-const viewer = document.getElementById("cabinet");
+  <script>
+    const viewer = document.getElementById("cabinet");
+    const openBtn = document.getElementById("open-btn");
+    const closeBtn = document.getElementById("close-btn");
 
-let duration = 0;
+    // OPEN DOOR
+    openBtn.addEventListener("click", () => {
+      viewer.timeScale = 1; // Play forward at normal speed
+      viewer.play();        // Plays to the end and stops naturally
+    });
 
-viewer.addEventListener("load", () => {
-  viewer.pause();
-  viewer.currentTime = 0;
-  duration = viewer.duration; // duration of 0-50 frames
-});
-
-function openDoor(){
-  viewer.pause();
-  viewer.currentTime = 0;
-  viewer.play();
-
-  setTimeout(() => {
-    viewer.pause();
-    viewer.currentTime = duration;
-  }, duration * 1000);
-}
-
-function closeDoor(){
-  viewer.pause();
-  viewer.currentTime = duration;
-  viewer.play({direction:"reverse"});
-
-  setTimeout(() => {
-    viewer.pause();
-    viewer.currentTime = 0;
-  }, duration * 1000);
-}
-</script>
+    // CLOSE DOOR
+    closeBtn.addEventListener("click", () => {
+      viewer.timeScale = -1; // Play backward at normal speed
+      viewer.play();         // Plays back to the start (frame 0) and stops naturally
+    });
+  </script>
   
 </body>
 </html>
